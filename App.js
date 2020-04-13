@@ -8,14 +8,19 @@ import {
   StatusBar,
 } from 'react-native';
 import { Navbar } from './src/Navbar';
+import { AddTodo } from './src/AddTodo';
 
 export default function App() {
   return (
-    <SafeAreaView style={{ backgroundColor: 'grey' }}>
+    // <SafeAreaView style={{ backgroundColor: '' }}>
+    <View >
+      <Navbar title="To-Do App" />
       <View style={styles.container}>
-        <Navbar title="toDo App" />
+        <AddTodo />
       </View>
-    </SafeAreaView>
+
+    </View>
+    // </SafeAreaView>
 
   )
 }
@@ -23,7 +28,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-
+    padding: 10,
 
   },
 });
