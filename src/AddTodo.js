@@ -9,8 +9,7 @@ export const AddTodo = props => {
                 placeholder="Input new to-do"
             />
             <Button
-
-                title="Add"
+                title=" Add "
             />
         </View>
     )
