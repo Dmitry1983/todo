@@ -1,18 +1,30 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, TextInput, Button } from 'react-native'
+import { View, StyleSheet, TextInput, Button, Alert } from 'react-native'
 
 export const AddTodo = ({ onSubmit }) => {
 
-    const [value, setValue] = useState([])
+    const [value, setValue] = useState('')
 
     const pressHendler = () => {
-        onSubmit('Test todo')
+        //onSubmit('Test todo')
+        if (value.trim()) {
+            onSubmit(value)
+            setValue('')
+        } else {
+            console.log('error, empty TextInput')
+            Alert.alert('error, empty TextInput')
+        }
     }
     return (
         <View style={styles.block}>
             <TextInput
                 style={styles.input}
-                placeholder="Input new to-do"
+                placeholder="Input new to-do..."
+                onChangeText={setValue}//{text => setValue(text)}
+                value={value}
+                autoCorrect={false}
+                autoCapitalize='none'
+            //keyboardType='number-pad'
             />
             <Button
                 title=" Add "
