@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import {
   SafeAreaView,
   StyleSheet,
-  View,
-  FlatList
+  View
 } from 'react-native'
 import { Navbar } from './src/components/Navbar'
 import { MainScreen } from './src/screens/MainScreen'
