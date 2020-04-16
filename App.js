@@ -8,6 +8,7 @@ import {
 import { Navbar } from './src/components/Navbar'
 import { MainScreen } from './src/screens/MainScreen'
 import { TodoScreen } from './src/screens/TodoScreen'
+import { THEME } from './src/theme'
 
 
 export default function App() {
@@ -37,7 +38,7 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={{ backgroundColor: 'grey' }}>
+    <SafeAreaView style={{ backgroundColor: THEME.MAIN_COLOR }}>
       <View >
         <Navbar title="To-Do App" />
         <View style={styles.container}>
