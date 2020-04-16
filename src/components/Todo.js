@@ -1,17 +1,12 @@
 import React from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 
-export const Todo = ({ todo, onRemove }) => {
-
-    // const longPressHeandler = () => {
-    //     onRemove(todo.id)
-    // }
-
-
+export const Todo = ({ todo, onRemove, onOpen }) => {
     return (
         <TouchableOpacity
             activeOpacity={0.4}
-            onPress={() => console.log('Pressed id : ' + todo.id)}
+            //onPress={() => console.log('Pressed id : ' + todo.id)}
+            onPress={() => (onOpen(todo.id))}
             //onLongPress={() => console.log('Pressed long id : ' + todo.id)}
             //onLongPress={() => onRemove(todo.id)}
             //onLongPress={longPressHeandler}

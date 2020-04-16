@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
   SafeAreaView,
   StyleSheet,
   View,
   FlatList
-} from 'react-native';
-import { Navbar } from './src/components/Navbar';
-//import { AddTodo } from './src/components/AddTodo';
-//import { Todo } from './src/components/Todo';
+} from 'react-native'
+import { Navbar } from './src/components/Navbar'
 import { MainScreen } from './src/screens/MainScreen'
-import { TodoScreen } from './src/screens/TodoScreen';
+import { TodoScreen } from './src/screens/TodoScreen'
 
 
 export default function App() {
@@ -21,20 +19,6 @@ export default function App() {
   }
 
   const addTodo = (title) => {
-    // const newTodo = {
-    //   id: Date.now().toString(),
-    //   title: title,
-    // }
-
-    //setTodos(todos.concat([newTodo]))
-
-    // setTodos((prevTodos)=>{
-    //   return[
-    //     ...prevTodos,
-    //     newTodo
-    //   ]
-
-    // })
     setTodos(prev => [
       ...prev,
       {
@@ -44,11 +28,12 @@ export default function App() {
   }
 
   let content = (
-    <MainScreen todos={todos} addTodo={addTodo} removeTodo={removeTodo} />
+    <MainScreen todos={todos} addTodo={addTodo} removeTodo={removeTodo} openTodo={setTodoId} />
   )
 
   if (todoId) {
-    content = <TodoScreen />
+    const selectedTodo = todos.find(todo => todo.id === todoId)
+    content = <TodoScreen goBack={() => setTodoId(null)} todo={selectedTodo} />
   }
 
   return (
