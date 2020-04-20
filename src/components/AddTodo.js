@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: THEME.COLOR.MAIN,
         padding: 10,
+        fontFamily: THEME.FONT.R_REG,
     },
 
 })
