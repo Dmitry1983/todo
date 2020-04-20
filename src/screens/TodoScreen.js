@@ -1,17 +1,22 @@
 import React from 'react'
-import { View, StyleSheet, Text, Button } from 'react-native'
+import { View, StyleSheet, Text, Button, Alert } from 'react-native'
 import { THEME } from '../theme'
+import { AppCard } from '../components/ui/AppCard'
 
-export const TodoScreen = ({ goBack, todo }) => {
+export const TodoScreen = ({ goBack, todo, onRemove }) => {
     return (
         <View style={styles.container}>
-            <Text>{todo.title}</Text>
+
+            <AppCard style={styles.card}>
+                <Text style={styles.title}>{todo.title}</Text>
+                <Button title='EDIT' />
+            </AppCard>
             <View style={styles.buttons}>
                 <View style={styles.button}>
                     <Button title="Back" color={THEME.COLOR.GREY} onPress={goBack} />
                 </View>
                 <View style={styles.button}>
-                    <Button title="Remove" color={THEME.COLOR.DANGER} onPress={() => console.log('to remove')} />
+                    <Button title="Remove" color={THEME.COLOR.DANGER} onPress={() => onRemove(todo.id)} />
                 </View>
 
             </View>
@@ -30,5 +35,13 @@ const styles = StyleSheet.create({
     },
     container: {
 
+    },
+    title: {
+        fontSize: 26,
+    },
+    card: {
+        padding: 40,
+        margin: 25
     }
+
 })

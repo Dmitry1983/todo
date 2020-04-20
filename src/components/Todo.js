@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 15,
         borderWidth: 1,
-        borderColor: THEME.MAIN_COLOR,
-        borderRadius: 5,
+        borderColor: THEME.COLOR.GREY,
+        borderRadius: 10,
         marginBottom: 10,
     }
 })

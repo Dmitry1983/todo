@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import {
   SafeAreaView,
   StyleSheet,
-  View
+  View,
+  Alert
 } from 'react-native'
 import { Navbar } from './src/components/Navbar'
 import { MainScreen } from './src/screens/MainScreen'
@@ -15,7 +16,29 @@ export default function App() {
   const [todos, setTodos] = useState([])
 
   const removeTodo = id => {
-    setTodos(prev => prev.filter(todo => todo.id !== id))
+    const todo = todos.find(t => t.id === id)
+
+    // Works on both Android and iOS
+    Alert.alert(
+      'Delete todo element',
+      `Do you want delete "${todo.title}" ?`,
+      [
+        {
+          text: 'Cancel',
+          // onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Delet',
+          style: 'destructive',
+          onPress: () => {
+            setTodoId(null)
+            setTodos(prev => prev.filter(todo => todo.id !== id))
+          }
+        },
+      ],
+      { cancelable: false },
+    );
   }
 
   const addTodo = (title) => {
@@ -33,7 +56,7 @@ export default function App() {
 
   if (todoId) {
     const selectedTodo = todos.find(todo => todo.id === todoId)
-    content = <TodoScreen goBack={() => setTodoId(null)} todo={selectedTodo} />
+    content = <TodoScreen onRemove={removeTodo} goBack={() => setTodoId(null)} todo={selectedTodo} />
   }
 
   return (
