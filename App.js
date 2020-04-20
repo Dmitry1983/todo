@@ -50,13 +50,33 @@ export default function App() {
       }])
   }
 
+  const updateTodo = (id, title) => {
+    setTodos(old =>
+      old.map(todo => {
+        if (todo.id === id) {
+          todo.title = title
+        }
+        return todo
+      })
+    )
+  }
+
   let content = (
-    <MainScreen todos={todos} addTodo={addTodo} removeTodo={removeTodo} openTodo={setTodoId} />
+    <MainScreen
+      todos={todos}
+      addTodo={addTodo}
+      removeTodo={removeTodo}
+      openTodo={setTodoId} />
   )
 
   if (todoId) {
     const selectedTodo = todos.find(todo => todo.id === todoId)
-    content = <TodoScreen onRemove={removeTodo} goBack={() => setTodoId(null)} todo={selectedTodo} />
+    content = <TodoScreen
+      onRemove={removeTodo}
+      goBack={() => setTodoId(null)}
+      todo={selectedTodo}
+      onSave={updateTodo}
+    />
   }
 
   return (
@@ -65,25 +85,6 @@ export default function App() {
         <Navbar title="To-Do App" />
         <View style={styles.container}>
           {content}
-          {/* <MainScreen todos={todos} addTodo={addTodo} removeTodo={removeTodo} /> */}
-
-          {/* <AddTodo onSubmit={addTodo} />
-
-          <FlatList
-            data={todos}
-            renderItem={({ item }) => (<Todo todo={item} onRemove={removeTodo} />)}
-            keyExtractor={item => item.id.toString()} //.toString()} переводим в стринг на всякий случай
-          /> */}
-
-          {/* <ScrollView>
-          <View>
-            {todos.map(todo => (
-              <Todo todo={todo} key={todo.id} />
-            ))}
-          </View>
-        </ScrollView> */}
-
-
         </View>
       </View>
     </SafeAreaView>
