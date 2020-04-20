@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         width: '80%',
         borderStyle: 'solid',
         borderBottomWidth: 1,
-        borderBottomColor: THEME.MAIN_COLOR,
+        borderBottomColor: THEME.COLOR.MAIN,
         padding: 10,
     },
 

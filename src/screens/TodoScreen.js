@@ -8,10 +8,10 @@ export const TodoScreen = ({ goBack, todo }) => {
             <Text>{todo.title}</Text>
             <View style={styles.buttons}>
                 <View style={styles.button}>
-                    <Button title="Back" color={THEME.GREY_COLOR} onPress={goBack} />
+                    <Button title="Back" color={THEME.COLOR.GREY} onPress={goBack} />
                 </View>
                 <View style={styles.button}>
-                    <Button title="Remove" color={THEME.DANGER_COLOR} onPress={() => console.log('to remove')} />
+                    <Button title="Remove" color={THEME.COLOR.DANGER} onPress={() => console.log('to remove')} />
                 </View>
 
             </View>

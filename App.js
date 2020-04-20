@@ -37,7 +37,7 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={{ backgroundColor: THEME.MAIN_COLOR }}>
+    <SafeAreaView style={{ backgroundColor: THEME.COLOR.MAIN }}>
       <View >
         <Navbar title="To-Do App" />
         <View style={styles.container}>
