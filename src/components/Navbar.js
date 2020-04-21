@@ -5,7 +5,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 export const Navbar = (props) => {  //(props)  => ({title})
-    const myIcon = <Icon name="check-circle" size={30} color={THEME.COLOR.GREY} />;
+    const myIcon = <Icon
+        name="check-circle"
+        size={30}
+        color={Platform.OS === 'android' ? THEME.COLOR.GREY : THEME.COLOR.MAIN}
+    />;
     return (
         <View style={{
             ...styles.navbar, ...Platform.select({

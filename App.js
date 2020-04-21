@@ -82,7 +82,7 @@ export default function App() {
   return (
     <SafeAreaView style={{}}>
       <View >
-        <Navbar title="To-Do App" />
+        <Navbar title="ToDo App" />
         <View style={styles.container}>
           {content}
         </View>
