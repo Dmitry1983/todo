@@ -7,6 +7,9 @@ export const THEME = {
     FONT: {
         R_BOLD: 'Roboto-Bold',
         R_REG: 'Roboto-Regular',
+    },
+    PADDING: {
+        HORIZONTAL: 30,
     }
 
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, TextInput, Button, Alert } from 'react-native'
+import { View, StyleSheet, TextInput, Button, Alert, Keyboard } from 'react-native'
 import { THEME } from '../theme'
 
 export const AddTodo = ({ onSubmit }) => {
@@ -11,6 +11,7 @@ export const AddTodo = ({ onSubmit }) => {
         if (value.trim()) {
             onSubmit(value)
             setValue('')
+            Keyboard.dismiss() // скрыть клавиатуру
         } else {
             console.log('error, empty TextInput')
             Alert.alert('error, empty TextInput')

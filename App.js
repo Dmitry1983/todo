@@ -80,7 +80,7 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={{ backgroundColor: THEME.COLOR.MAIN }}>
+    <SafeAreaView style={{}}>
       <View >
         <Navbar title="To-Do App" />
         <View style={styles.container}>
@@ -93,8 +93,10 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    backgroundColor: 'white'
+    //padding: 10,
+    backgroundColor: 'white',
+    paddingVertical: 20,
+    paddingHorizontal: THEME.PADDING.HORIZONTAL,
   },
 });
 

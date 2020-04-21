@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Text, Button } from 'react-native'
+import { View, StyleSheet, Text, Button, Dimensions } from 'react-native'
 import { THEME } from '../theme'
 import { AppCard } from '../components/ui/AppCard'
 import { EditModal } from '../components/EditModal'
@@ -45,7 +45,8 @@ export const TodoScreen = ({ goBack, todo, onRemove, onSave }) => {
 
 const styles = StyleSheet.create({
     button: {
-        width: '30%',
+        // width: Dimensions.get('window').width / 3
+        width: Dimensions.get('window').width > 400 ? 150 : 100
     },
     buttons: {
         flexDirection: 'row',
