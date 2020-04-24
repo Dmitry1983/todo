@@ -5,7 +5,7 @@ import { todoReducer } from './todoReducer'
 export const TodoSatate = ({ children }) => {
 
     const initialState = {
-        todos: [{ id: '1', title: 'Hello React Native' }]
+        todos: [{ id: '1', title: 'Hello useReduser' }]
     }
 
     const [state, dispatch] = useReducer(todoReducer, initialState)

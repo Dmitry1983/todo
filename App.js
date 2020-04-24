@@ -14,7 +14,6 @@ import { THEME } from './src/theme'
 export default function App() {
   const [todoId, setTodoId] = useState(null)
   const [todos, setTodos] = useState([])
-
   const removeTodo = id => {
     const todo = todos.find(t => t.id === id)
 

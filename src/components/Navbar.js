@@ -8,7 +8,7 @@ export const Navbar = (props) => {  //(props)  => ({title})
     const myIcon = <Icon
         name="check-circle"
         size={30}
-        color={Platform.OS === 'android' ? THEME.COLOR.GREY : THEME.COLOR.MAIN}
+        color={Platform.OS === 'android' ? 'white' : THEME.COLOR.MAIN}
     />;
     return (
         <View style={{

@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, TextInput, Button, Alert, Keyboard } from 'react-native'
+import { View, StyleSheet, TextInput, Alert, Keyboard } from 'react-native'
 import { THEME } from '../theme'
+import { Button, ThemeProvider } from 'react-native-elements';
+
+
 
 export const AddTodo = ({ onSubmit }) => {
 
@@ -17,6 +20,7 @@ export const AddTodo = ({ onSubmit }) => {
             Alert.alert('error, empty TextInput')
         }
     }
+
     return (
         <View style={styles.block}>
             <TextInput
@@ -29,8 +33,9 @@ export const AddTodo = ({ onSubmit }) => {
             //keyboardType='number-pad'
             />
             <Button
-                title=" Add "
+                title="Add"
                 onPress={pressHendler}
+                titleStyle={{ color: 'white' }}
             />
         </View>
     )
