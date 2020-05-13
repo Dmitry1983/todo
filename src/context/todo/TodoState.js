@@ -11,10 +11,13 @@ export const TodoState = ({ children }) => {
 
     const [state, dispatch] = useReducer(todoReducer, initialState)
 
+    // @ts-ignore
     const addTodo = title => dispatch({ type: ADD_TODO, title })
 
+    // @ts-ignore
     const removeTodo = id => dispatch({ type: REMOVE_TODO, id })
 
+    // @ts-ignore
     const updateTodo = (id, title) => dispatch({ type: UPDATE_TODO, id, title })
 
     return (
