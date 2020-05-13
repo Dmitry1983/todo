@@ -17,6 +17,7 @@ export const TodoState = ({ children }) => {
     // @ts-ignore
     const removeTodo = id => dispatch({ type: REMOVE_TODO, id })
 
+
     // @ts-ignore
     const updateTodo = (id, title) => dispatch({ type: UPDATE_TODO, id, title })
 
