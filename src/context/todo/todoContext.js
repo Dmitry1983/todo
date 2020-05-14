@@ -1,4 +1,3 @@
-import { createContext } from 'react'
+import React from 'react'
 
-// @ts-ignore
-export const TodoContext = createContext()
+export const TodoContext = React.createContext()

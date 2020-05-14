@@ -6,10 +6,16 @@ import { ADD_TODO, REMOVE_TODO, UPDATE_TODO } from '../types'
 export const TodoState = ({ children }) => {
 
     const initialState = {
-        todos: [{ id: '1', title: 'Hello useReduser' }]
+        todos: [
+            { id: '1', title: 'Hello useReduser' },
+            { id: '2', title: 'Hello 2 useReduser' }
+        ]
+
+        // todos:[]
     }
 
     const [state, dispatch] = useReducer(todoReducer, initialState)
+
 
     // @ts-ignore
     const addTodo = title => dispatch({ type: ADD_TODO, title })
@@ -17,9 +23,9 @@ export const TodoState = ({ children }) => {
     // @ts-ignore
     const removeTodo = id => dispatch({ type: REMOVE_TODO, id })
 
-
     // @ts-ignore
     const updateTodo = (id, title) => dispatch({ type: UPDATE_TODO, id, title })
+
 
     return (
         <TodoContext.Provider
