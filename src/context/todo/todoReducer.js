@@ -10,11 +10,11 @@ import {
 } from "../types"
 
 const handlers = {
-    [ADD_TODO]: (state, { title }) => ({
+    [ADD_TODO]: (state, { title, id }) => ({
         ...state,
         todos: [
             ...state.todos, {
-                id: Date.now().toString(),
+                id: id,
                 title: title
             }]
     }),
