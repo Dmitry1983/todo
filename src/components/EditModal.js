@@ -13,6 +13,11 @@ export const EditModal = ({ visible, onCencel, value, onSave }) => {
         }
     }
 
+    const cencelHandler = () => {
+        setTitle(value)
+        onCencel()
+    }
+
     return (
         <Modal
             visible={visible}
@@ -29,7 +34,7 @@ export const EditModal = ({ visible, onCencel, value, onSave }) => {
 
                 />
                 <View style={styles.buttons}>
-                    <Button title="Cencel" onPress={onCencel} color={THEME.COLOR.GREY} />
+                    <Button title="Cencel" onPress={cencelHandler} color={THEME.COLOR.GREY} />
                     <Button title="Save" onPress={saveHandler} color={THEME.COLOR.MAIN} />
                 </View>
             </View>

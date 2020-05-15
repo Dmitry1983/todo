@@ -9,84 +9,18 @@ import { THEME } from './theme'
 import { Navbar } from './components/Navbar'
 import { MainScreen } from './screens/MainScreen'
 import { TodoScreen } from './screens/TodoScreen'
-import { TodoContext } from './context/todo/todoContext'
+import { ScreenContext } from './context/screen/screenContext'
 
 
 export const MainLayout = () => {
-    const { todos, addTodo, removeTodo, updateTodo } = useContext(TodoContext)
-    const [todoId, setTodoId] = useState(null)
-    // const [todos, setTodos] = useState([])
-
-    // const removeTodo = id => {
-    //     const todo = todos.find(t => t.id === id)
-
-    //     // Works on both Android and iOS
-    //     Alert.alert(
-    //         'Delete todo element',
-    //         `Do you want delete "${todo.title}" ?`,
-    //         [
-    //             {
-    //                 text: 'Cancel',
-    //                 // onPress: () => console.log('Cancel Pressed'),
-    //                 style: 'cancel',
-    //             },
-    //             {
-    //                 text: 'Delet',
-    //                 style: 'destructive',
-    //                 onPress: () => {
-    //                     setTodoId(null)
-    //                     setTodos(prev => prev.filter(todo => todo.id !== id))
-    //                 }
-    //             },
-    //         ],
-    //         { cancelable: false },
-    //     );
-    // }
-
-    // const addTodo = (title) => {
-    //     setTodos(prev => [
-    //         ...prev,
-    //         {
-    //             id: Date.now().toString(),
-    //             title // т.к. имя поля объекта и переменной совпадают ==> title : title
-    //         }])
-    // }
-
-    // const updateTodo = (id, title) => {
-    //     setTodos(old =>
-    //         old.map(todo => {
-    //             if (todo.id === id) {
-    //                 todo.title = title
-    //             }
-    //             return todo
-    //         })
-    //     )
-    // }
-
-    let content = (
-        <MainScreen
-            todos={todos}
-            addTodo={addTodo}
-            removeTodo={removeTodo}
-            openTodo={setTodoId} />
-    )
-
-    if (todoId) {
-        const selectedTodo = todos.find(todo => todo.id === todoId)
-        content = <TodoScreen
-            onRemove={removeTodo}
-            goBack={() => setTodoId(null)}
-            todo={selectedTodo}
-            onSave={updateTodo}
-        />
-    }
+    const { todoId } = useContext(ScreenContext)
 
     return (
         <SafeAreaView style={{}}>
             <View >
                 <Navbar title="ToDo App" />
                 <View style={styles.container}>
-                    {content}
+                    {todoId ? <TodoScreen /> : <MainScreen />}
                 </View>
             </View>
         </SafeAreaView>
