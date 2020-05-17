@@ -5,6 +5,8 @@ import { Todo } from '../components/Todo';
 import { THEME } from '../theme'
 import { TodoContext } from '../context/todo/todoContext';
 import { ScreenContext } from '../context/screen/screenContext';
+import AppLoader from '../components/ui/AppLoader';
+import AppError from '../components/ui/AppError';
 
 export const MainScreen = () => {
     const { addTodo, todos, removeTodo, fetchTodos, loading, error } = useContext(TodoContext)
@@ -31,7 +33,14 @@ export const MainScreen = () => {
             Dimensions.removeEventListener('change', update)
         }
     })
+    if (loading) { return <AppLoader /> } // View Loadeer on the Screen
 
+    if (error) {
+        return <AppError
+            error={error}
+            onPress={loadTodos}
+        />
+    }
 
 
     let content = (

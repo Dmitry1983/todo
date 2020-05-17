@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import {
     SafeAreaView,
     StyleSheet,
@@ -16,8 +16,8 @@ export const MainLayout = () => {
     const { todoId } = useContext(ScreenContext)
 
     return (
-        <SafeAreaView style={{}}>
-            <View >
+        <SafeAreaView style={{ flex: 1 }}>
+            <View style={{ flex: 1 }}>
                 <Navbar title="ToDo App" />
                 <View style={styles.container}>
                     {todoId ? <TodoScreen /> : <MainScreen />}
@@ -35,5 +35,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingVertical: 20,
         paddingHorizontal: THEME.PADDING.HORIZONTAL,
+        flex: 1
     },
 });

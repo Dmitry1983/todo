@@ -2,19 +2,30 @@ import React, { useReducer, useContext } from 'react'
 import { Alert } from 'react-native'
 import { TodoContext } from './todoContext'
 import { todoReducer } from './todoReducer'
-import { ADD_TODO, REMOVE_TODO, UPDATE_TODO, SHOW_LOADER, HIDE_LOADER, SHOW_ERROR, CLEAR_ERROR, FETCH_TODOS } from '../types'
+import {
+    ADD_TODO,
+    REMOVE_TODO,
+    UPDATE_TODO,
+    SHOW_LOADER,
+    HIDE_LOADER,
+    SHOW_ERROR,
+    CLEAR_ERROR,
+    FETCH_TODOS
+} from '../types'
 import { ScreenContext } from '../screen/screenContext'
+import { Http } from '..//../http'
 
+//------------ URL
 const url = 'https://rn-todo-app-4c535.firebaseio.com/'
+
+function nameBase(url, id = '') {
+    return url + `todos/${id}.json`
+}
+//------------ URL
 
 export const TodoState = ({ children }) => {
 
     const initialState = {
-        // todos: [
-        //     { id: '1', title: 'Hello useReduser' },
-        //     { id: '2', title: 'Hello 2 useReduser' }
-        // ]
-
         todos: [],
         loading: false,
         error: null
@@ -24,28 +35,39 @@ export const TodoState = ({ children }) => {
     const [state, dispatch] = useReducer(todoReducer, initialState)
 
 
-    // @ts-ignore
+
     const addTodo = async title => {
-        const response = await fetch(url + 'todos.json', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title })
-        })
-        const data = await response.json()
-        const id = data.name
-        console.log('data: ', data.name)
-        dispatch({ type: ADD_TODO, title, id })
+        clearError()
+        showLoader()
+        try {
+            const data = await Http.post(nameBase(url), { title })
+            const id = data.name
+            // @ts-ignore
+            dispatch({ type: ADD_TODO, title, id })
+        } catch (error) {
+            showError('Error on add todo...')
+            console.log('error add : ', error)
+        }
+        hideLoader()
+
     }
 
     const fetchTodos = async () => {
-        const response = await fetch(url + 'todos.json', {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        })
-        const data = await response.json()
-        console.log('FETCH DATA: ', data)
-        const todos = Object.keys(data).map(key => ({ ...data[key], id: key }))
-        dispatch({ type: FETCH_TODOS, todos })
+        showLoader()
+        clearError()
+        let allData = undefined
+        try {
+            const data = await Http.get(nameBase(url))
+            if (data === null) { allData = null }
+            const todos = Object.keys(data).map(key => ({ ...data[key], id: key }))
+            //@ts-ignore
+            dispatch({ type: FETCH_TODOS, todos })
+        } catch (error) {
+            if (allData !== null) { showError('Error on connect...') }
+            allData = undefined
+        }
+        hideLoader()
+
     }
 
 
@@ -57,16 +79,24 @@ export const TodoState = ({ children }) => {
             [
                 {
                     text: 'Cancel',
-                    // onPress: () => console.log('Cancel Pressed'),
                     style: 'cancel',
                 },
                 {
-                    text: 'Delet',
+                    text: 'Delete',
                     style: 'destructive',
-                    onPress: () => {
+                    onPress: async () => {
                         changeScreen(null)
-                        // @ts-ignore
-                        dispatch({ type: REMOVE_TODO, id })
+                        showLoader()
+                        clearError()
+                        try {
+                            await Http.delete(nameBase(url, id))
+                        } catch (error) {
+                            showError('Error to delete this one todo...')
+                        } finally {
+                            // @ts-ignore
+                            dispatch({ type: REMOVE_TODO, id })
+                        }
+                        hideLoader()
                     }
                 },
             ],
@@ -74,8 +104,19 @@ export const TodoState = ({ children }) => {
         );
     }
 
-    // @ts-ignore
-    const updateTodo = (id, title) => dispatch({ type: UPDATE_TODO, id, title })
+    const updateTodo = async (id, title) => {
+        clearError()
+        showLoader()
+        try {
+            await Http.patch(nameBase(url, id), { title })
+        } catch (error) {
+            showError('Error to update database...')
+        } finally {
+            // @ts-ignore
+            dispatch({ type: UPDATE_TODO, id, title })
+        }
+        hideLoader()
+    }
 
     // @ts-ignore
     const showLoader = () => dispatch({ type: SHOW_LOADER })
@@ -105,4 +146,3 @@ export const TodoState = ({ children }) => {
         </TodoContext.Provider>
     )
 }
-
